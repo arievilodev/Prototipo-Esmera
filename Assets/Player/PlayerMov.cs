@@ -25,4 +25,4 @@ public class Player : MonoBehaviour
     {
         rb.MovePosition(rb.position + mov.normalized * speed * Time.fixedDeltaTime);
     }
-}
+};
