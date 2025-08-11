@@ -6,9 +6,10 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    // Movimenta��o do jogador  
+    // Movimentação do jogador  
     [SerializeField] float speed = 1;
     public Rigidbody2D rb;
+    public Collider2D playerCollider;
     public Vector2 mov;
     public Animator anim;
 
@@ -158,8 +159,24 @@ public class Player : MonoBehaviour
 
             isDead = true;
             anim.SetBool("IsDead", isDead);
-            enabled = false;
-            
+            //enabled = false;
+
+            // --- NOVA LÓGICA ---
+            // Desativa a simulação do Rigidbody
+            if (rb != null)
+            {
+                // rb.simulated = false; é a forma mais limpa de desativar a física.
+                rb.linearVelocity = Vector2.zero;
+                rb.angularVelocity = 0;
+                rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            }
+
+            // Desativa o Collider
+            if (playerCollider != null)
+            {
+                playerCollider.enabled = false;
+            }
+
         }
     }
 };
