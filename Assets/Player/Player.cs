@@ -17,14 +17,17 @@ public class Player : MonoBehaviour
     [SerializeField] Image redLifeBar;
     [SerializeField] int maxLife;
     [SerializeField] int currentLife;
-    [SerializeField] bool isDead;
+    public bool isDead;
 
     // Knockback do jogador ao receber dano
     public float kBForce;
     public float kBCount;
     public float kBTime;
 
-    public bool isKnockRight;
+    //public bool isKnockRight;
+
+    // Ataque do jogador
+    //private bool isAttack = false;
 
     void Start() { 
         
@@ -34,7 +37,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        KnockLogic();
+        MoveLogic();
+        //OnAttack();
 
         // Teste da barra de vida para perder vida
         if (Input.GetKeyDown(KeyCode.J)) {
@@ -50,10 +54,15 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + mov.normalized * speed * Time.fixedDeltaTime);
+        rb.linearVelocity = mov.normalized * speed;
+
+        if (mov == Vector2.zero) {
+            rb.linearVelocity = Vector2.zero;
+        }
+            
     }
 
-    void KnockLogic()
+    /*void KnockLogic()
     {
         if (kBCount < 0){
             MoveLogic();
@@ -66,7 +75,7 @@ public class Player : MonoBehaviour
             }
         }
         kBCount -= Time.deltaTime;
-    }
+    }*/
 
     public void MoveLogic() {
         mov.x = Input.GetAxis("Horizontal");
@@ -81,7 +90,7 @@ public class Player : MonoBehaviour
     {
         SetLife(-amount);
         anim.SetTrigger("TakeDamage");
-        kBCount = kBTime;
+        //kBCount = kBTime;
     }
 
     public void Heal(int amount)
@@ -101,6 +110,31 @@ public class Player : MonoBehaviour
         DeadState();
 
     }
+
+    /*void OnAttack() {
+
+        EnemyShortDistance enemy = gameObject.GetComponent<EnemyShortDistance>();
+        
+        if (Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.LeftControl)) {  
+            isAttack = true;
+            anim.SetBool("isAttack", true);
+            enemy.TakeDamageEnemy(10);
+
+        }
+        else
+        {
+            // Se o botão não estiver mais pressionado, define o parâmetro para false
+            anim.SetBool("isAttack", false);
+        }
+        //EndAttack();
+
+    }
+
+    public void EndAttack()
+    {
+        isAttack = false;
+        anim.SetBool("isAttack", false);
+    }*/
 
     IEnumerator DecreasingRedLifeBar(Vector3 Scale)
     {
