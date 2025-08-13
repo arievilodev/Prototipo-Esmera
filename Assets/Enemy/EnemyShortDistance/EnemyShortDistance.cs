@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyShortDistance : MonoBehaviour
 {
@@ -15,15 +16,24 @@ public class EnemyShortDistance : MonoBehaviour
     [SerializeField] private int maxLife = 30;
     [SerializeField] private int currentLife;
     [SerializeField] private bool isDead = false;
+    [SerializeField] private Transform target;
+    NavMeshAgent agent;
 
-    
 
 
-    void Start() { 
-    
+    void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false; // Desativa a rota����o autom��tica do NavMeshAgent
+        agent.updateUpAxis = false;
+
+        agent.speed = speedEnemy; // Define a velocidade do inimigo
+
         posPlayer = GameObject.FindGameObjectWithTag("Player").transform; // Encontra o jogador na cena e armazena sua posi��o
+
         rbEnemy = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
         initialPositionEnemy = rbEnemy.position;
         currentLife = maxLife; // Inicializa a vida do inimigo com o valor m�ximo
     }
@@ -52,13 +62,18 @@ public class EnemyShortDistance : MonoBehaviour
 
     }
 
-    private void FollowPlayer() {
-
-        
-        if (posPlayer.gameObject != null) {
-            transform.position = Vector2.MoveTowards(transform.position, posPlayer.position, speedEnemy * Time.deltaTime);
+    private void FollowPlayer()
+    {
+        if (posPlayer.gameObject != null)
+        {
+            agent.SetDestination(posPlayer.position); // Move o inimigo em dire����o ao jogador
         }
-    
+
+        // if (posPlayer.gameObject != null)
+        // {
+        //     transform.position = Vector2.MoveTowards(transform.position, posPlayer.position, speedEnemy * Time.deltaTime);
+        // }
+
     }
 
     public void TakeDamageEnemy(int amount)
@@ -66,7 +81,7 @@ public class EnemyShortDistance : MonoBehaviour
         anim.SetTrigger("hit");
         if (isDead) return;
         currentLife -= amount;
-        
+
         if (currentLife <= 0)
         {
             DieEnemy();
@@ -104,7 +119,8 @@ public class EnemyShortDistance : MonoBehaviour
             {
                 player.TakeDamage(10);
 
-                if (player.isDead) {
+                if (player.isDead)
+                {
                     playerDetected = false;
                     StartCoroutine(ReturnToStart());
                 }
@@ -116,14 +132,17 @@ public class EnemyShortDistance : MonoBehaviour
 
     private IEnumerator ReturnToStart()
     {
+        agent.SetDestination(initialPositionEnemy); // Move o inimigo de volta para a posi����o inicial
+        yield return new WaitForFixedUpdate();
+
         // Enquanto n�o chegou ao ponto inicial, mova o inimigo para l�
-        while ((Vector2)transform.position != initialPositionEnemy)
-        {
-            Vector2 direction = (initialPositionEnemy - (Vector2)transform.position).normalized;
-            rbEnemy.MovePosition(rbEnemy.position + direction * speedEnemy * Time.fixedDeltaTime);
-            yield return new WaitForFixedUpdate();
-        }
-        // Garante que a posi��o final seja exatamente a inicial
-        rbEnemy.MovePosition(initialPositionEnemy);
+        // while ((Vector2)transform.position != initialPositionEnemy)
+        // {
+        //     Vector2 direction = (initialPositionEnemy - (Vector2)transform.position).normalized;
+        //     rbEnemy.MovePosition(rbEnemy.position + direction * speedEnemy * Time.fixedDeltaTime);
+        //     yield return new WaitForFixedUpdate();
+        // }
+        // // Garante que a posi��o final seja exatamente a inicial
+        // rbEnemy.MovePosition(initialPositionEnemy);
     }
 }
