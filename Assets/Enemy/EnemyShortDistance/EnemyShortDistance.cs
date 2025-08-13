@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyShortDistance : MonoBehaviour
 {
-    private Transform posPlayer; // Variável para armazenar a posição do jogador
+    private Transform posPlayer; // Variï¿½vel para armazenar a posiï¿½ï¿½o do jogador
     public float speedEnemy;
     [SerializeField] private Rigidbody2D rbEnemy;
     private bool playerDetected = false;
@@ -21,11 +21,11 @@ public class EnemyShortDistance : MonoBehaviour
 
     void Start() { 
     
-        posPlayer = GameObject.FindGameObjectWithTag("Player").transform; // Encontra o jogador na cena e armazena sua posição
+        posPlayer = GameObject.FindGameObjectWithTag("Player").transform; // Encontra o jogador na cena e armazena sua posiï¿½ï¿½o
         rbEnemy = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         initialPositionEnemy = rbEnemy.position;
-        currentLife = maxLife; // Inicializa a vida do inimigo com o valor máximo
+        currentLife = maxLife; // Inicializa a vida do inimigo com o valor mï¿½ximo
     }
 
     void Update()
@@ -78,7 +78,7 @@ public class EnemyShortDistance : MonoBehaviour
         isDead = true;
         // Exemplo: desativa o inimigo
         gameObject.SetActive(false);
-        // Ou: anim.SetTrigger("Dead"); se tiver animação
+        // Ou: anim.SetTrigger("Dead"); se tiver animaï¿½ï¿½o
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -90,15 +90,15 @@ public class EnemyShortDistance : MonoBehaviour
     }
 
 
-    // Inicializando a colisão do inimigo
+    // Inicializando a colisï¿½o do inimigo
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Verifica se o objeto colidido é o jogador a partir da tag "Player"
+        // Verifica se o objeto colidido ï¿½ o jogador a partir da tag "Player"
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Obtém o componente Player, guarda os resultados no objeto player
+            // Obtï¿½m o componente Player, guarda os resultados no objeto player
             Player player = collision.gameObject.GetComponent<Player>();
-            // Se o componente PlayerMov não for nulo, ou seja, se tiver sido encontrado, então o método TakeDamage é chamado,
+            // Se o componente PlayerMov nï¿½o for nulo, ou seja, se tiver sido encontrado, entï¿½o o mï¿½todo TakeDamage ï¿½ chamado,
             // tirando 10 pontos de vida do jogador */
             if (player != null)
             {
@@ -116,14 +116,14 @@ public class EnemyShortDistance : MonoBehaviour
 
     private IEnumerator ReturnToStart()
     {
-        // Enquanto não chegou ao ponto inicial, mova o inimigo para lá
+        // Enquanto nï¿½o chegou ao ponto inicial, mova o inimigo para lï¿½
         while ((Vector2)transform.position != initialPositionEnemy)
         {
             Vector2 direction = (initialPositionEnemy - (Vector2)transform.position).normalized;
             rbEnemy.MovePosition(rbEnemy.position + direction * speedEnemy * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
-        // Garante que a posição final seja exatamente a inicial
+        // Garante que a posiï¿½ï¿½o final seja exatamente a inicial
         rbEnemy.MovePosition(initialPositionEnemy);
     }
 }
