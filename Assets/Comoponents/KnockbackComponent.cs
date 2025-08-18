@@ -28,6 +28,11 @@ public class KnockbackComponent : MonoBehaviour
         // }
     }
 
+    public void Knockbacked()
+    {
+        isKnockbackActive = true;
+    }
+
     public void ApplyKnockback()
     {
         if (isKnockbackActive && knockbackTimer < knockbackDuration)

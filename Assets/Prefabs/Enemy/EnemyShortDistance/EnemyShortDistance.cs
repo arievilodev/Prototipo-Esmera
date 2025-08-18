@@ -54,11 +54,11 @@ public class EnemyShortDistance : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (playerDetected)
-        {
-            Vector2 direction = (posPlayer.position - transform.position).normalized;
-            rbEnemy.MovePosition(rbEnemy.position + direction * speedEnemy * Time.fixedDeltaTime);
-        }
+        // if (playerDetected)
+        // {
+        //     Vector2 direction = (posPlayer.position - transform.position).normalized;
+        //     rbEnemy.MovePosition(rbEnemy.position + direction * speedEnemy * Time.fixedDeltaTime);
+        // }
 
     }
 
@@ -117,9 +117,10 @@ public class EnemyShortDistance : MonoBehaviour
             // tirando 10 pontos de vida do jogador */
             if (player != null)
             {
-                player.TakeDamage(10);
-                player.knockbackComponent.isKnockbackActive = true;
-
+                var knockbackDirection = (player.transform.position - transform.position).normalized;
+                player.TakeDamage(10, knockbackDirection);
+                // player.knockbackComponent.Knockbacked();
+                // player.knockbackComponent.knockbackDirection = ;
                 if (player.isDead)
                 {
                     playerDetected = false;

@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
         // Teste da barra de vida para perder vida
         if (Input.GetKeyDown(KeyCode.J)) {
-            TakeDamage(10);
+            TakeDamage(10, new Vector2(0, 0));
         };
 
         // Teste da barra de vida para ganhar vida
@@ -96,10 +96,12 @@ public class Player : MonoBehaviour
         anim.SetFloat("Speed", mov.sqrMagnitude);
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, Vector2 knockbackDirection)
     {
         SetLife(-amount);
         anim.SetTrigger("TakeDamage");
+        knockbackComponent.Knockbacked();
+        knockbackComponent.knockbackDirection = knockbackDirection;
         //kBCount = kBTime;
     }
 
