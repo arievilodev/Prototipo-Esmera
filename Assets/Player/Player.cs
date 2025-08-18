@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     public bool isDead;
 
     // Knockback do jogador ao receber dano
+    public KnockbackComponent knockbackComponent;
     public float kBForce;
     public float kBCount;
     public float kBTime;
@@ -31,7 +32,7 @@ public class Player : MonoBehaviour
     //private bool isAttack = false;
 
     void Start() { 
-        
+        knockbackComponent = GetComponent<KnockbackComponent>();
         currentLife = maxLife;
 
     }
@@ -55,11 +56,19 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = mov.normalized * speed;
-
-        if (mov == Vector2.zero) {
-            rb.linearVelocity = Vector2.zero;
+        if (knockbackComponent.isKnockbackActive)
+        {
+            knockbackComponent.ApplyKnockback();
         }
+        else
+        {
+            rb.linearVelocity = mov.normalized * speed;
+        }
+        
+
+        // if (mov == Vector2.zero) {
+        //     rb.linearVelocity = Vector2.zero;
+        // }
             
     }
 

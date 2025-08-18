@@ -118,6 +118,7 @@ public class EnemyShortDistance : MonoBehaviour
             if (player != null)
             {
                 player.TakeDamage(10);
+                player.knockbackComponent.isKnockbackActive = true;
 
                 if (player.isDead)
                 {
