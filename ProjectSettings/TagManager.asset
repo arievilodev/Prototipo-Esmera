@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - EnemyShortDistance
+  - NPC
   layers:
   - Default
   - TransparentFX
