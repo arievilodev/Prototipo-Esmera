@@ -27,19 +27,19 @@ public class Player : MonoBehaviour
     public float kBTime;
 
     // Sistema de diálogo:
-    [SerializeField] Transform npcRobot;
+    /*[SerializeField] Transform npcRobot;
     dialogueSystem dialogueSystem;
-    public dialogueUI dialogueUI;
+    public dialogueUI dialogueUI;*/
 
     //public bool isKnockRight;
 
     // Ataque do jogador
     //private bool isAttack = false;
 
-    void Awake()
+    /*void Awake()
     {
         dialogueSystem = FindFirstObjectByType<dialogueSystem>();
-    }
+    }*/
 
     void Start() { 
         knockbackComponent = GetComponent<KnockbackComponent>();
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
             Heal(10);
         };
 
-        EnteringDialogue();
+        //EnteringDialogue();
 
     }
 
@@ -203,12 +203,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void EnteringDialogue() { 
+    /*private void EnteringDialogue() { 
         if(Mathf.Abs(transform.position.x - npcRobot.position.x) < 2.0f)
         {
             if (Input.GetKeyDown(KeyCode.E))
                 dialogueUI.Enable();
                 dialogueSystem.StartDialogue();
         }
-    }
+    }*/
 };

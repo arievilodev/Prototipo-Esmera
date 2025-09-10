@@ -1,4 +1,4 @@
-using TMPro;
+/*using TMPro;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,10 +40,10 @@ public class dialogueUI : MonoBehaviour
         }
         else {
             background.fillAmount = Mathf.Lerp(background.fillAmount, 0, speed * Time.deltaTime);
-        }*/
+        }
     }
 
-    public void SetName(string name) {
+   public void SetName(string name) {
         nameText.text = name;
     }
 
@@ -60,4 +60,4 @@ public class dialogueUI : MonoBehaviour
         nameText.text = "";
         talkText.text = "";
     }
-}
+}*/
