@@ -26,6 +26,12 @@ public class Player : MonoBehaviour
     public float kBCount;
     public float kBTime;
 
+    //ATAQUE DO JOGADOR
+    [SerializeField] private float attackRange = 1f; // alcance do ataque
+    [SerializeField] private int attackDamage = 1;  // dano do ataque
+    [SerializeField] private LayerMask enemyLayer;   // layer dos inimigos
+
+
     // Sistema de diálogo:
     /*[SerializeField] Transform npcRobot;
     dialogueSystem dialogueSystem;
@@ -61,7 +67,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H)) {
             Heal(10);
         };
-
+        Atacar();
         //EnteringDialogue();
 
     }
@@ -134,6 +140,27 @@ public class Player : MonoBehaviour
         DeadState();
 
     }
+
+    private void Atacar() {
+        if (Input.GetKeyDown(KeyCode.Z) ){
+            anim.SetTrigger("Attack");
+            // Detecta inimigos no alcance
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer);
+
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<EnemyShortDistance>()?.TakeDamageEnemy(attackDamage);
+            }
+        }
+        ;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
 
     /*void OnAttack() {
 

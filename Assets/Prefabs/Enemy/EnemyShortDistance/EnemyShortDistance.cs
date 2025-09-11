@@ -79,10 +79,18 @@ public class EnemyShortDistance : MonoBehaviour
     public void TakeDamageEnemy(int amount)
     {
         anim.SetTrigger("hit");
-        if (isDead) return;
-        currentLife -= amount;
 
-        if (currentLife <= 0)
+        if (isDead || isInvulnerable) return;
+
+        currentLife -= amount;
+        Debug.Log("Inimigo levou dano! Vida atual: " + currentLife);
+
+        if (currentLife > 0)
+        {
+            anim.SetTrigger("hit");
+            StartCoroutine(InvulnerabilityFrames());
+        }
+        else
         {
             DieEnemy();
         }
@@ -130,6 +138,7 @@ public class EnemyShortDistance : MonoBehaviour
             }
 
         }
+
     }
 
     private IEnumerator ReturnToStart()
@@ -147,4 +156,16 @@ public class EnemyShortDistance : MonoBehaviour
         // // Garante que a posi��o final seja exatamente a inicial
         // rbEnemy.MovePosition(initialPositionEnemy);
     }
+
+    private bool isInvulnerable = false;
+    [SerializeField] private float invulnerableTime = 0.2f;
+
+
+    private IEnumerator InvulnerabilityFrames()
+    {
+        isInvulnerable = true;
+        yield return new WaitForSeconds(invulnerableTime);
+        isInvulnerable = false;
+    }
+
 }
