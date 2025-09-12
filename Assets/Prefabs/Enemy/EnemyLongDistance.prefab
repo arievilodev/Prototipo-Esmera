@@ -282,7 +282,7 @@ MonoBehaviour:
   speedEnemy: 2
   damage: 10
   stoppingDistance: 7.25
-  maxLife: 30
+  maxLife: 300
   currentLife: 0
   isDead: 0
   playerDead: 0
@@ -305,3 +305,4 @@ MonoBehaviour:
   currentLife: 0
   isDead: 0
   target: {fileID: 0}
+  invulnerableTime: 0.2

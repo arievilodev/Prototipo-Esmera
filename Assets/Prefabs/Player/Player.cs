@@ -26,20 +26,26 @@ public class Player : MonoBehaviour
     public float kBCount;
     public float kBTime;
 
+    //ATAQUE DO JOGADOR
+    [SerializeField] private float attackRange = 1f; // alcance do ataque
+    [SerializeField] private int attackDamage = 1;  // dano do ataque
+    [SerializeField] private LayerMask enemyLayer;   // layer dos inimigos
+
+
     // Sistema de diálogo:
-    [SerializeField] Transform npcRobot;
+    /*[SerializeField] Transform npcRobot;
     dialogueSystem dialogueSystem;
-    public dialogueUI dialogueUI;
+    public dialogueUI dialogueUI;*/
 
     //public bool isKnockRight;
 
     // Ataque do jogador
     //private bool isAttack = false;
 
-    void Awake()
+    /*void Awake()
     {
         dialogueSystem = FindFirstObjectByType<dialogueSystem>();
-    }
+    }*/
 
     void Start() { 
         knockbackComponent = GetComponent<KnockbackComponent>();
@@ -61,8 +67,8 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H)) {
             Heal(10);
         };
-
-        EnteringDialogue();
+        Atacar();
+        //EnteringDialogue();
 
     }
 
@@ -135,6 +141,27 @@ public class Player : MonoBehaviour
 
     }
 
+    private void Atacar() {
+        if (Input.GetKeyDown(KeyCode.Z) ){
+            anim.SetTrigger("Attack");
+            // Detecta inimigos no alcance
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer);
+
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                enemy.GetComponent<EnemyShortDistance>()?.TakeDamageEnemy(attackDamage);
+            }
+        }
+        ;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+
     /*void OnAttack() {
 
         EnemyShortDistance enemy = gameObject.GetComponent<EnemyShortDistance>();
@@ -203,12 +230,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void EnteringDialogue() { 
+    /*private void EnteringDialogue() { 
         if(Mathf.Abs(transform.position.x - npcRobot.position.x) < 2.0f)
         {
             if (Input.GetKeyDown(KeyCode.E))
                 dialogueUI.Enable();
                 dialogueSystem.StartDialogue();
         }
-    }
+    }*/
 };

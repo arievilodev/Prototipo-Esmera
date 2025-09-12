@@ -15393,8 +15393,6 @@ MonoBehaviour:
   kBForce: 0
   kBCount: 0
   kBTime: 0
-  npcRobot: {fileID: 2009352267}
-  dialogueUI: {fileID: 0}
 --- !u!212 &683613295
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15794,7 +15792,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b0c3d6030d4a8419f714f71a6075d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 0}
+  nameText: {fileID: 0}
+  talkText: {fileID: 0}
   speed: 10
+  open: 0
 --- !u!1 &1559317369
 GameObject:
   m_ObjectHideFlags: 0
@@ -15887,7 +15889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1745181224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15931,6 +15933,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueData: {fileID: 11400000, guid: c5f3c81f97773ae4b8e324c578943e77, type: 2}
+  currentText: 0
+  finished: 0
+  typeText: {fileID: 0}
+  dialogueUI: {fileID: 0}
+  state: 0
 --- !u!1 &1924886030
 GameObject:
   m_ObjectHideFlags: 0
@@ -16028,7 +16035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1986403767
 MonoBehaviour:
   m_ObjectHideFlags: 0
