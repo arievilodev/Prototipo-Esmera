@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EnemyShortDistance
   - NPC
+  - Enemy
   layers:
   - Default
   - TransparentFX
