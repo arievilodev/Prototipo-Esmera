@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     public float kBTime;
 
     //ATAQUE DO JOGADOR
-    [SerializeField] private float attackRange = 1f; // alcance do ataque
+    [SerializeField] private float attackRange = 0.00005f; // alcance do ataque
     [SerializeField] private int attackDamage = 1;  // dano do ataque
     [SerializeField] private LayerMask enemyLayer;   // layer dos inimigos
 
@@ -147,9 +147,9 @@ public class Player : MonoBehaviour
             // Detecta inimigos no alcance
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer);
 
-            foreach (Collider2D enemy in hitEnemies)
+            foreach (Collider2D Enemy in hitEnemies)
             {
-                enemy.GetComponent<EnemyShortDistance>()?.TakeDamageEnemy(attackDamage);
+                Enemy.GetComponent<EnemyShortDistance>()?.TakeDamageEnemy(attackDamage);
             }
         }
         ;

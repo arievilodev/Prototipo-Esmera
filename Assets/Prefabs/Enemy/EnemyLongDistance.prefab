@@ -282,8 +282,8 @@ MonoBehaviour:
   speedEnemy: 2
   damage: 10
   stoppingDistance: 7.25
-  maxLife: 300
-  currentLife: 0
+  maxLife: 30
+  currentLife: 30
   isDead: 0
   playerDead: 0
 --- !u!114 &129438993433216002
@@ -302,7 +302,7 @@ MonoBehaviour:
   rbEnemy: {fileID: 4255024454571030627}
   anim: {fileID: 2023877059669174241}
   maxLife: 30
-  currentLife: 0
+  currentLife: 30
   isDead: 0
   target: {fileID: 0}
   invulnerableTime: 0.2

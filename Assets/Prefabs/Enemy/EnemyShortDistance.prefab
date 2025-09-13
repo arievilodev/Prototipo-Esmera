@@ -302,6 +302,7 @@ MonoBehaviour:
   rbEnemy: {fileID: 962212762959088346}
   anim: {fileID: 7389439943946237773}
   maxLife: 30
-  currentLife: 0
+  currentLife: 30
   isDead: 0
   target: {fileID: 0}
+  invulnerableTime: 0.2

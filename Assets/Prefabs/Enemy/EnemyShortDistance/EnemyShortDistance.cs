@@ -13,7 +13,7 @@ public class EnemyShortDistance : MonoBehaviour
     public Animator anim;
 
     // Sistema de vida do inimigo
-    [SerializeField] private int maxLife = 30;
+    [SerializeField] private int maxLife = 100;
     [SerializeField] private int currentLife;
     [SerializeField] private bool isDead = false;
     [SerializeField] private Transform target;
@@ -143,6 +143,8 @@ public class EnemyShortDistance : MonoBehaviour
 
     private IEnumerator ReturnToStart()
     {
+        agent = GetComponent<NavMeshAgent>();
+
         agent.SetDestination(initialPositionEnemy); // Move o inimigo de volta para a posi����o inicial
         yield return new WaitForFixedUpdate();
 
@@ -159,13 +161,13 @@ public class EnemyShortDistance : MonoBehaviour
 
     private bool isInvulnerable = false;
     [SerializeField] private float invulnerableTime = 0.2f;
-
-
     private IEnumerator InvulnerabilityFrames()
     {
         isInvulnerable = true;
         yield return new WaitForSeconds(invulnerableTime);
         isInvulnerable = false;
     }
+
+
 
 }

@@ -15393,6 +15393,11 @@ MonoBehaviour:
   kBForce: 0
   kBCount: 0
   kBTime: 0
+  attackRange: 1
+  attackDamage: 1
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!212 &683613295
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -15457,7 +15462,7 @@ Transform:
   m_GameObject: {fileID: 683613292}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -39.87162, y: 233.43538, z: 0}
+  m_LocalPosition: {x: -39.87162, y: 233.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15792,11 +15797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b0c3d6030d4a8419f714f71a6075d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background: {fileID: 0}
-  nameText: {fileID: 0}
-  talkText: {fileID: 0}
-  speed: 10
-  open: 0
 --- !u!1 &1559317369
 GameObject:
   m_ObjectHideFlags: 0
@@ -15902,9 +15902,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0ef5dee6f36594fb3a8e2bbcf69532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typeDelay: 0.05
-  textObject: {fileID: 426938339}
-  fullText: "Ol\xE1 Mundo! Essa \xE9 a primeira caixa de di\xE1logo!"
 --- !u!4 &1745181225
 Transform:
   m_ObjectHideFlags: 0
@@ -15932,12 +15929,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07779aa0646167e43b29a97066ccb9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueData: {fileID: 11400000, guid: c5f3c81f97773ae4b8e324c578943e77, type: 2}
-  currentText: 0
-  finished: 0
-  typeText: {fileID: 0}
-  dialogueUI: {fileID: 0}
-  state: 0
 --- !u!1 &1924886030
 GameObject:
   m_ObjectHideFlags: 0
@@ -16477,6 +16468,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 899385415}
     m_Modifications:
+    - target: {fileID: 2986619532691368755, guid: c0bf828baf1d151408da6fb4c9183a43, type: 3}
+      propertyPath: maxLife
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 6326345515850565341, guid: c0bf828baf1d151408da6fb4c9183a43, type: 3}
       propertyPath: m_LocalPosition.x
       value: -69.32
